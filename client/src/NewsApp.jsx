@@ -11,7 +11,7 @@ export default function NewsApp() {
   });
   const getData = async (query = search) => {
     try {
-      const res = await fetch(`/api/news?q=${query}`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/news?q=${query}`);
       const data = await res.json();
       setNewsData(data.articles || []);
     } catch (error) {
