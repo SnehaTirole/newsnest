@@ -9,16 +9,23 @@ export default function NewsApp() {
     // Load saved preference or default to false
     return localStorage.getItem("lightMode") === "true";
   });
+
+ 
   const getData = async (query = search) => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/news?q=${query}`);
+      const url = `${import.meta.env.VITE_API_URL}/api/news?q=${query}`;
+      // console.log("Requesting:", url);
+  
+      const res = await fetch(url);
       const data = await res.json();
+      // console.log("API data:", data);
+  
       setNewsData(data.articles || []);
     } catch (error) {
       console.error("Error fetching news:", error);
     }
   };
-
+  
   // Fetch default news on initial load
   useEffect(() => {
     getData();
